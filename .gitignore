@@ -1,0 +1,60 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+*.egg-info/
+dist/
+build/
+
+# 环境变量
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+
+# iOS
+**/ios/.default_mode
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/profile
+**/ios/DerivedData/
+**/ios/Flutter/.last_build_id
+
+# Android
+**/android/**/gradle-wrapper.jar
+**/android/.gradle
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/local.properties
+**/android/**/GeneratedPluginRegistrant.java
+
+# 临时文件
+*.tmp
+*.log
+.DS_Store
+Thumbs.db
+
+# 测试
+.pytest_cache/
+.coverage
+htmlcov/
