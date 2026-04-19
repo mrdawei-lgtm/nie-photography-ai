@@ -6,7 +6,7 @@ import httpx
 
 
 class ZhipuAIService:
-    """智谱AI服务（备选模型）- 使用HTTP API调用"""
+    """智谱AI服务（主模型：GLM-4.6V）- 使用HTTP API调用"""
 
     def __init__(self):
         self.api_key = settings.zhipuai_api_key
@@ -15,7 +15,7 @@ class ZhipuAIService:
 
     async def analyze_image(self, image_base64: str) -> Dict[str, Any]:
         """
-        使用智谱AI GLM-4V分析图片
+        使用智谱AI GLM-4.6V分析图片
 
         Args:
             image_base64: Base64编码的图片

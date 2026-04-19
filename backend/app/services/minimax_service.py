@@ -6,7 +6,7 @@ import httpx
 
 
 class MiniMaxService:
-    """MiniMax AI服务（主模型）"""
+    """MiniMax服务（对比模型：MiniMax-VL）- 使用HTTP API调用"""
 
     def __init__(self):
         self.api_key = settings.minimax_api_key
@@ -16,7 +16,7 @@ class MiniMaxService:
 
     async def analyze_image(self, image_base64: str) -> Dict[str, Any]:
         """
-        使用MiniMax视觉模型分析图片
+        使用MiniMax-VL分析图片
 
         Args:
             image_base64: Base64编码的图片

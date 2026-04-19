@@ -21,8 +21,8 @@ Nie（读音：捏）是一个AI辅助摄影App，帮助用户在拍摄当下快
 
 ### 后端
 - **Python + FastAPI** - 轻量级API服务
-- **智谱AI GLM-4V** - 视觉分析大模型（主）
-- **MiniMax Vision-v1** - 视觉分析大模型（对比，用于A/B测试）
+- **智谱AI GLM-4.6V** - 视觉分析大模型（主）
+- **MiniMax-VL** - 视觉分析大模型（对比，用于A/B测试）
 
 ## 项目结构
 
@@ -33,9 +33,13 @@ nie-photography-ai/
 │   ├── models/      # 数据模型
 │   ├── services/    # 业务逻辑
 │   └── tests/       # 测试
-├── mobile/          # Flutter移动端
-│   ├── lib/        # Dart代码
-│   └── ios/        # iOS原生配置
+├── mobile/          # iOS原生App（MVP）
+│   ├── Nie/        # Xcode项目
+│   │   ├── App/    # 应用入口
+│   │   ├── Models/ # 数据模型
+│   │   ├── Services/# API服务
+│   │   └── Views/  # SwiftUI视图
+│   └── Nie.xcodeproj
 ├── docs/            # 项目文档
 └── scripts/         # 脚本工具
 ```
@@ -64,10 +68,11 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-### 移动端
+### 移动端（iOS）
 ```bash
 cd mobile
-flutter run
+open Nie.xcodeproj
+# 在Xcode中运行项目
 ```
 
 ## 许可证

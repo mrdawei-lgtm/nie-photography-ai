@@ -15,9 +15,9 @@ class AnalysisService:
     """图片分析服务"""
 
     def __init__(self):
-        # 主模型：智谱AI GLM-4V
+        # 主模型：智谱AI GLM-4.6V
         self.zhipuai_service = ZhipuAIService()
-        # 对比模型：MiniMax（用于A/B测试）
+        # 对比模型：MiniMax-VL（用于A/B测试）
         self.minimax_service = MiniMaxService() if settings.minimax_api_key else None
 
     async def analyze_photo(self, image_base64: str) -> AnalysisResult:
@@ -30,7 +30,7 @@ class AnalysisService:
         Returns:
             分析结果
         """
-        # 优先使用智谱AI（主力模型）
+        # 优先使用智谱AI（主力模型：GLM-4.6V）
         ai_result = await self.zhipuai_service.analyze_image(image_base64)
 
         # 如果智谱AI失败，尝试降级到MiniMax
