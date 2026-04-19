@@ -20,8 +20,8 @@ async def analyze_photo(request: AnalysisRequest):
         # 假设前端已经去掉了data:image/xxx;base64,前缀
         image_data = request.image_data
 
-        # 执行分析
-        result = analysis_service.analyze_photo(image_data)
+        # 执行分析（异步）
+        result = await analysis_service.analyze_photo(image_data)
 
         return AnalysisResponse(
             success=True,

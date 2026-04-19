@@ -5,7 +5,9 @@ from app.models.schemas import (
     CompositionAnalysis,
     SubjectType
 )
+from app.services.minimax_service import MiniMaxService
 from app.services.zhipuai_service import ZhipuAIService
+from app.core.config import settings
 import uuid
 
 
@@ -13,9 +15,10 @@ class AnalysisService:
     """图片分析服务"""
 
     def __init__(self):
-        self.ai_service = ZhipuAIService()
+        self.minimax_service = MiniMaxService()
+        self.zhipuai_service = ZhipuAIService() if settings.zhipuai_api_key else None
 
-    def analyze_photo(self, image_base64: str) -> AnalysisResult:
+    async def analyze_photo(self, image_base64: str) -> AnalysisResult:
         """
         分析照片
 
@@ -25,8 +28,13 @@ class AnalysisService:
         Returns:
             分析结果
         """
-        # 调用AI分析
-        ai_result = self.ai_service.analyze_image(image_base64)
+        # 优先使用MiniMax
+        ai_result = await self.minimax_service.analyze_image(image_base64)
+
+        # 如果MiniMax失败，尝试降级到智谱AI
+        if "error" in ai_result and self.zhipuai_service:
+            print("MiniMax失败，尝试使用智谱AI...")
+            ai_result = self.zhipuai_service.analyze_image(image_base64)
 
         if "error" in ai_result:
             raise Exception(f"AI分析失败: {ai_result['error']}")

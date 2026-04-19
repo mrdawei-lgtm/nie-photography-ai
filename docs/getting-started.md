@@ -20,12 +20,16 @@ backend/
 
 ✅ **核心功能实现**
 - FastAPI应用框架
-- 智谱AI GLM-4V集成
+- MiniMax Vision-v1集成（主模型）
+- 智谱AI GLM-4V集成（备选模型）
 - 图片分析API
 - 数据模型定义
 
 ✅ **文档**
 - README.md
+- 产品定位文档 (docs/product-brief.md)
+- 技术决策文档 (docs/tech-decision.md)
+- MVP范围文档 (docs/mvp-scope.md)
 - 后端开发环境配置
 - 移动端开发环境配置
 - 开发计划
@@ -39,15 +43,18 @@ python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env
-# 编辑.env，填入智谱AI API密钥
+# 编辑.env，填入MiniMax API密钥
 ```
 
-### 2. 测试智谱AI集成
-```bash
-cd scripts
-# 放置一张测试图片为 test_photo.jpg
-python test_zhipuai.py
-```
+### 2. 获取API密钥
+
+**MiniMax（主模型，必需）：**
+- 访问 https://api.minimax.chat/
+- 注册并获取 API Key 和 Group ID
+
+**智谱AI（备选模型，可选）：**
+- 访问 https://open.bigmodel.cn/
+- 注册并获取 API Key
 
 ### 3. 启动开发服务器
 ```bash
@@ -72,11 +79,18 @@ xcodebuild -project Nie.xcodeproj -list
 
 - **移动端：** iOS原生（Swift + SwiftUI），Flutter为跨平台备选
 - **后端：** Python + FastAPI
-- **AI模型：** 智谱AI GLM-4V（国内，支持中文）
+- **AI模型：** MiniMax Vision-v1（主，国内），智谱AI GLM-4V（备选，用于A/B测试）
 
 ## 需要你做的事
 
-1. 注册智谱AI账号，获取API密钥：https://open.bigmodel.cn/
-2. 配置本地开发环境（后端）
-3. 安装Xcode（如果还没有）
-4. 告诉我准备好了，我们可以开始第一个开发任务！
+1. 注册MiniMax账号，获取API密钥：https://api.minimax.chat/
+2. 注册智谱AI账号，获取API密钥（可选）：https://open.bigmodel.cn/
+3. 配置本地开发环境（后端）
+4. 安装Xcode（如果还没有）
+5. 告诉我准备好了，我们可以开始第一个开发任务！
+
+## 关键文档
+
+- 产品定位：`docs/product-brief.md` - 了解我们的核心定位
+- 技术决策：`docs/tech-decision.md` - 了解技术选型原则
+- MVP范围：`docs/mvp-scope.md` - 了解MVP包含和不包含的功能
