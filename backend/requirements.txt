@@ -3,8 +3,9 @@ uvicorn[standard]==0.24.0
 pydantic==2.5.0
 pydantic-settings==2.1.0
 python-multipart==0.0.6
-minimax==1.0.0
-zhipuai==2.0.1
+# 智谱AI（备选模型）
+zhipuai==2.1.5.20250825
+# MiniMax没有官方Python SDK，使用httpx直接调用API
 pillow==10.1.0
 python-dotenv==1.0.0
 httpx==0.25.1
