@@ -21,8 +21,8 @@ Nie（读音：捏）是一个AI辅助摄影App，帮助用户在拍摄当下快
 
 ### 后端
 - **Python + FastAPI** - 轻量级API服务
-- **MiniMax Vision-v1** - 视觉分析大模型（主）
-- **智谱AI GLM-4V** - 视觉分析大模型（备选，用于A/B测试）
+- **智谱AI GLM-4V** - 视觉分析大模型（主）
+- **MiniMax Vision-v1** - 视觉分析大模型（对比，用于A/B测试）
 
 ## 项目结构
 
