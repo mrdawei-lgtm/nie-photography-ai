@@ -56,6 +56,8 @@ cp .env.example .env
 - 访问 https://open.bigmodel.cn/
 - 注册并获取 API Key
 
+注意：我们通过HTTP API直接调用，不安装Python SDK，方便未来切换到其他大模型。
+
 ### 3. 启动开发服务器
 ```bash
 cd backend

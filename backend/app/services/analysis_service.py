@@ -34,7 +34,7 @@ class AnalysisService:
         # 如果MiniMax失败，尝试降级到智谱AI
         if "error" in ai_result and self.zhipuai_service:
             print("MiniMax失败，尝试使用智谱AI...")
-            ai_result = self.zhipuai_service.analyze_image(image_base64)
+            ai_result = await self.zhipuai_service.analyze_image(image_base64)
 
         if "error" in ai_result:
             raise Exception(f"AI分析失败: {ai_result['error']}")

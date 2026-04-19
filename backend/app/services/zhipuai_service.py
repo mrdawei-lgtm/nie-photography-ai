@@ -1,20 +1,21 @@
-from zhipuai import ZhipuAI
 from app.core.config import settings
-from typing import Dict, Any, List
+from typing import Dict, Any
 import base64
 import json
+import httpx
 
 
 class ZhipuAIService:
-    """智谱AI服务"""
+    """智谱AI服务（备选模型）- 使用HTTP API调用"""
 
     def __init__(self):
-        self.client = ZhipuAI(api_key=settings.zhipuai_api_key)
+        self.api_key = settings.zhipuai_api_key
         self.model = settings.zhipuai_model
+        self.base_url = "https://open.bigmodel.cn/api/paas/v4"
 
-    def analyze_image(self, image_base64: str) -> Dict[str, Any]:
+    async def analyze_image(self, image_base64: str) -> Dict[str, Any]:
         """
-        使用GLM-4V分析图片
+        使用智谱AI GLM-4V分析图片
 
         Args:
             image_base64: Base64编码的图片
@@ -26,29 +27,46 @@ class ZhipuAIService:
         prompt = self._build_analysis_prompt()
 
         try:
-            response = self.client.chat.completions.create(
-                model=self.model,
-                messages=[
-                    {
-                        "role": "user",
-                        "content": [
+            async with httpx.AsyncClient(timeout=30.0) as client:
+                response = await client.post(
+                    f"{self.base_url}/chat/completions",
+                    headers={
+                        "Authorization": f"Bearer {self.api_key}",
+                        "Content-Type": "application/json"
+                    },
+                    json={
+                        "model": self.model,
+                        "messages": [
                             {
-                                "type": "image_url",
-                                "image_url": {
-                                    "url": image_base64
-                                }
-                            },
-                            {
-                                "type": "text",
-                                "text": prompt
+                                "role": "user",
+                                "content": [
+                                    {
+                                        "type": "image_url",
+                                        "image_url": {
+                                            "url": image_base64
+                                        }
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": prompt
+                                    }
+                                ]
                             }
-                        ]
+                        ],
+                        "temperature": 0.7,
+                        "max_tokens": 1000
                     }
-                ]
-            )
+                )
 
-            result_text = response.choices[0].message.content
-            return self._parse_result(result_text)
+                if response.status_code == 200:
+                    result = response.json()
+                    result_text = result["choices"][0]["message"]["content"]
+                    return self._parse_result(result_text)
+                else:
+                    return {
+                        "error": f"智谱AI API调用失败: {response.status_code}",
+                        "details": response.text
+                    }
 
         except Exception as e:
             print(f"智谱AI调用失败: {e}")
