@@ -1,51 +1,42 @@
-# 移动端开发环境配置
-
-## Flutter安装
-
-### macOS
-
-1. 下载Flutter SDK:
-   ```bash
-   cd ~/development
-   unzip ~/Downloads/flutter_macos_arm64_3.24.5-stable.zip
-   export PATH="$PATH:`pwd`/flutter/bin"
-   ```
-
-2. 验证安装:
-   ```bash
-   flutter doctor
-   ```
-
-3. 安装依赖:
-   ```bash
-   flutter precache
-   ```
-
-### 初始化项目
-
+### 移动端
 ```bash
 cd mobile
-flutter create --org com.nie --platforms ios .
+# 创建iOS项目
+xcodebuild -list
+# 或者使用Xcode创建新项目
 ```
 
-## 依赖安装
+## 依赖安装（Swift Package Manager）
 
-```bash
-cd mobile
-flutter pub add camera image_picker http dio
-flutter pub add provider
-```
+### 主依赖
+- Alamofire - HTTP网络请求
+- Kingfisher - 图片加载和缓存
+- SwiftUI
 
-## 项目结构
+### 项目结构
 
 ```
 mobile/
-├── lib/
-│   ├── main.dart
-│   ├── models/          # 数据模型
-│   ├── services/        # API服务
-│   ├── screens/         # 页面
-│   └── widgets/         # 组件
-├── ios/                 # iOS原生配置
-└── pubspec.yaml
+├── Nie/
+│   ├── App/
+│   │   ├── NieApp.swift
+│   │   └── ContentView.swift
+│   ├── Models/          # 数据模型
+│   ├── Services/        # API服务
+│   ├── Views/           # 页面视图
+│   │   ├── CameraView.swift
+│   │   ├── ResultView.swift
+│   │   └── ...
+│   └── Resources/       # 资源文件
+└── Nie.xcodeproj
+```
+
+## 配置Info.plist
+
+添加相机和相册权限：
+```xml
+<key>NSCameraUsageDescription</key>
+<string>需要使用相机拍摄照片</string>
+<key>NSPhotoLibraryUsageDescription</key>
+<string>需要访问相册选择照片</string>
 ```

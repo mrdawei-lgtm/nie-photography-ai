@@ -16,8 +16,8 @@ Nie（读音：捏）是一个AI辅助摄影App，帮助用户在拍摄当下快
 ## 技术栈
 
 ### 移动端
-- **Flutter** - 跨平台移动应用框架
-- **Swift + SwiftUI** - iOS原生特性集成（需要时）
+- **iOS原生 (MVP)** - Swift + SwiftUI
+- **Flutter（备选）** - 未来跨平台需求时使用
 
 ### 后端
 - **Python + FastAPI** - 轻量级API服务

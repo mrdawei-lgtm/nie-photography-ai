@@ -58,22 +58,25 @@ uvicorn app.main:app --reload
 
 访问 http://localhost:8000/docs 查看API文档
 
-### 4. 初始化Flutter项目
+### 4. 创建iOS项目
 ```bash
-# 先安装Flutter
 cd mobile
-flutter create --org com.nie --platforms ios .
+# 使用Xcode创建新项目
+# 或命令行创建
+xcodebuild -project Nie.xcodeproj -list
 ```
+
+参考 `docs/mobile-setup.md` 配置SwiftUI和AVFoundation
 
 ## 技术栈确认
 
-- **移动端：** Flutter（iOS优先，可扩展到Android）
+- **移动端：** iOS原生（Swift + SwiftUI），Flutter为跨平台备选
 - **后端：** Python + FastAPI
 - **AI模型：** 智谱AI GLM-4V（国内，支持中文）
 
 ## 需要你做的事
 
 1. 注册智谱AI账号，获取API密钥：https://open.bigmodel.cn/
-2. 安装Flutter（如果还没有）
-3. 配置本地开发环境
+2. 配置本地开发环境（后端）
+3. 安装Xcode（如果还没有）
 4. 告诉我准备好了，我们可以开始第一个开发任务！
